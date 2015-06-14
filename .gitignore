@@ -1,4 +1,5 @@
 fuse
+iDeviceFramework
 \#*
 .scons*
 *.o

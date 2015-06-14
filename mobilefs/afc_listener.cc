@@ -4,6 +4,8 @@
 // a feeling this might leak connections.
 
 #include "mobilefs/afc_listener.h"
+#include "MobileDevice.h"
+#include "mobilefs/mobiledevice_ex.h"
 
 #include <string>
 #include <syslog.h>
@@ -96,12 +98,16 @@ bool AfcListener::InitializeDevice(am_device* device) {
 }
 
 bool AfcListener::OpenConnection(am_device* device) {
-  int socket;
-  int ret = AMDeviceStartService(device, afc_service_name_, &socket);
+  afc_connection* socket = NULL;
+  
+  // mach_error_t AMDeviceStartService(struct am_device *device, CFStringRef service_name, void *handle, unsigned int * unknown);
+  int ret = AMDeviceStartService(device, afc_service_name_, &socket, NULL);
   if (ret != MDERR_OK) {
     syslog(LOG_ERR, "AMDeviceStartService failed");
     return false;
   }
+
+  // afc_error_t AFCConnectionOpen(struct afc_connection *handle, unsigned int io_timeout, struct afc_connection **conn);  
   ret = AFCConnectionOpen(socket, 0, &connection_);
   if (ret != MDERR_OK) {
     syslog(LOG_ERR, "AFCConnectionOpen failed");

@@ -58,35 +58,35 @@ extern "C" {
   
   struct am_recovery_device;
   
-  struct am_device_notification_callback_info {
-    struct am_device *dev;  /* 0    device */ 
-    unsigned int msg;       /* 4    one of ADNCI_MSG_* */
-                struct am_device_notification* subscription; 
-  } __PACK;
+  /* struct am_device_notification_callback_info { */
+  /*   struct am_device *dev;  /\* 0    device *\/  */
+  /*   unsigned int msg;       /\* 4    one of ADNCI_MSG_* *\/ */
+  /*               struct am_device_notification* subscription;  */
+  /* } __PACK; */
   
   /* The type of the device restore notification callback functions.
    * TODO: change to correct type. */
   typedef void (*am_restore_device_notification_callback)(struct am_recovery_device *);
   
   /* This is a CoreFoundation object of class AMRecoveryModeDevice. */
-  struct am_recovery_device {
-    unsigned char unknown0[8];                          /* 0 */
-    am_restore_device_notification_callback callback;   /* 8 */
-    void *user_info;                                    /* 12 */
-    unsigned char unknown1[12];                         /* 16 */
-    unsigned int readwrite_pipe;                        /* 28 */
-    unsigned char read_pipe;                            /* 32 */
-    unsigned char write_ctrl_pipe;                      /* 33 */
-    unsigned char read_unknown_pipe;                    /* 34 */
-    unsigned char write_file_pipe;                      /* 35 */
-    unsigned char write_input_pipe;                     /* 36 */
-  } __PACK;
+  /* struct am_recovery_device { */
+  /*   unsigned char unknown0[8];                          /\* 0 *\/ */
+  /*   am_restore_device_notification_callback callback;   /\* 8 *\/ */
+  /*   void *user_info;                                    /\* 12 *\/ */
+  /*   unsigned char unknown1[12];                         /\* 16 *\/ */
+  /*   unsigned int readwrite_pipe;                        /\* 28 *\/ */
+  /*   unsigned char read_pipe;                            /\* 32 *\/ */
+  /*   unsigned char write_ctrl_pipe;                      /\* 33 *\/ */
+  /*   unsigned char read_unknown_pipe;                    /\* 34 *\/ */
+  /*   unsigned char write_file_pipe;                      /\* 35 *\/ */
+  /*   unsigned char write_input_pipe;                     /\* 36 *\/ */
+  /* } __PACK; */
   
   /* A CoreFoundation object of class AMRestoreModeDevice. */
-  struct am_restore_device {
-    unsigned char unknown[32];
-    int port;
-  } __PACK;
+  /* struct am_restore_device { */
+  /*   unsigned char unknown[32]; */
+  /*   int port; */
+  /* } __PACK; */
   
   /* The type of the device notification callback function. */
   typedef void(*am_device_notification_callback)(struct am_device_notification_callback_info *, void* cookie);
@@ -102,41 +102,41 @@ extern "C" {
   /* Structure that contains internal data used by AMDevice... functions. Never try 
          * to access its members directly! Use AMDeviceCopyDeviceIdentifier, 
          * AMDeviceGetConnectionID, AMDeviceRetain, AMDeviceRelease instead. */
-  struct am_device {
-    unsigned char unknown0[16]; /* 0 - zero */
-    unsigned int device_id;     /* 16 */
-    unsigned int product_id;    /* 20 - set to AMD_IPHONE_PRODUCT_ID */
-    char *serial;               /* 24 - set to UDID, Unique Device Identifier */
-    unsigned int unknown1;      /* 28 */
-    unsigned int unknown2;      /* 32 - reference counter, increased by AMDeviceRetain, decreased by AMDeviceRelease*/
-    unsigned int lockdown_conn; /* 36 */
-    unsigned char unknown3[8];  /* 40 */
-    unsigned int unknown4;      /* 48 - used to store CriticalSection Handle*/
-    unsigned char unknown5[24];  /* 52 */
-  } __PACK;
+  /* struct am_device { */
+  /*   unsigned char unknown0[16]; /\* 0 - zero *\/ */
+  /*   unsigned int device_id;     /\* 16 *\/ */
+  /*   unsigned int product_id;    /\* 20 - set to AMD_IPHONE_PRODUCT_ID *\/ */
+  /*   char *serial;               /\* 24 - set to UDID, Unique Device Identifier *\/ */
+  /*   unsigned int unknown1;      /\* 28 *\/ */
+  /*   unsigned int unknown2;      /\* 32 - reference counter, increased by AMDeviceRetain, decreased by AMDeviceRelease*\/ */
+  /*   unsigned int lockdown_conn; /\* 36 *\/ */
+  /*   unsigned char unknown3[8];  /\* 40 *\/ */
+  /*   unsigned int unknown4;      /\* 48 - used to store CriticalSection Handle*\/ */
+  /*   unsigned char unknown5[24];  /\* 52 *\/ */
+  /* } __PACK; */
   
-  struct am_device_notification {
-    unsigned int unknown0;                      /* 0 */
-    unsigned int unknown1;                      /* 4 */
-    unsigned int unknown2;                      /* 8 */
-    am_device_notification_callback callback;   /* 12 */ 
-    unsigned int cookie;                      /* 16 */
-  } __PACK;
+  /* struct am_device_notification { */
+  /*   unsigned int unknown0;                      /\* 0 *\/ */
+  /*   unsigned int unknown1;                      /\* 4 *\/ */
+  /*   unsigned int unknown2;                      /\* 8 *\/ */
+  /*   am_device_notification_callback callback;   /\* 12 *\/  */
+  /*   unsigned int cookie;                      /\* 16 *\/ */
+  /* } __PACK; */
   
-  struct afc_connection {
-    unsigned int handle;            /* 0 */
-    unsigned int unknown0;          /* 4 */
-    unsigned char unknown1;         /* 8 */
-    unsigned char padding[3];       /* 9 */
-    unsigned int unknown2;          /* 12 */
-    unsigned int unknown3;          /* 16 */
-    unsigned int unknown4;          /* 20 */
-    unsigned int fs_block_size;     /* 24 */
-    unsigned int sock_block_size;   /* 28: always 0x3c */
-    unsigned int io_timeout;        /* 32: from AFCConnectionOpen, usu. 0 */
-    void *afc_lock;                 /* 36 */
-    unsigned int context;           /* 40 */
-  } __PACK;
+  /* struct afc_connection { */
+  /*   unsigned int handle;            /\* 0 *\/ */
+  /*   unsigned int unknown0;          /\* 4 *\/ */
+  /*   unsigned char unknown1;         /\* 8 *\/ */
+  /*   unsigned char padding[3];       /\* 9 *\/ */
+  /*   unsigned int unknown2;          /\* 12 *\/ */
+  /*   unsigned int unknown3;          /\* 16 *\/ */
+  /*   unsigned int unknown4;          /\* 20 *\/ */
+  /*   unsigned int fs_block_size;     /\* 24 *\/ */
+  /*   unsigned int sock_block_size;   /\* 28: always 0x3c *\/ */
+  /*   unsigned int io_timeout;        /\* 32: from AFCConnectionOpen, usu. 0 *\/ */
+  /*   void *afc_lock;                 /\* 36 *\/ */
+  /*   unsigned int context;           /\* 40 *\/ */
+  /* } __PACK; */
   
   
 
@@ -144,35 +144,35 @@ extern "C" {
     unsigned char unknown[12];  /* 0 */
   } __PACK;
 
-  struct afc_directory {
-    unsigned char unknown[0];   /* size unknown */
-  } __PACK;
+  /* struct afc_directory { */
+  /*   unsigned char unknown[0];   /\* size unknown *\/ */
+  /* } __PACK; */
 
-  struct afc_dictionary {
-    unsigned char unknown[0];   /* size unknown */
-  } __PACK;
+  /* struct afc_dictionary { */
+  /*   unsigned char unknown[0];   /\* size unknown *\/ */
+  /* } __PACK; */
   
   typedef unsigned long long afc_file_ref;
   
-  struct usbmux_listener_1 {                  /* offset   value in iTunes */
-    unsigned int unknown0;                  /* 0        1 */
-    unsigned char *unknown1;                /* 4        ptr, maybe device? */
-    amd_device_attached_callback callback;  /* 8        _AMDDeviceAttached */
-    unsigned int unknown3;                  /* 12 */
-    unsigned int unknown4;                  /* 16 */
-    unsigned int unknown5;                  /* 20 */
-  } __PACK;
+  /* struct usbmux_listener_1 {                  /\* offset   value in iTunes *\/ */
+  /*   unsigned int unknown0;                  /\* 0        1 *\/ */
+  /*   unsigned char *unknown1;                /\* 4        ptr, maybe device? *\/ */
+  /*   amd_device_attached_callback callback;  /\* 8        _AMDDeviceAttached *\/ */
+  /*   unsigned int unknown3;                  /\* 12 *\/ */
+  /*   unsigned int unknown4;                  /\* 16 *\/ */
+  /*   unsigned int unknown5;                  /\* 20 *\/ */
+  /* } __PACK; */
   
-  struct usbmux_listener_2 {
-    unsigned char unknown0[4144];
-  } __PACK;
+  /* struct usbmux_listener_2 { */
+  /*   unsigned char unknown0[4144]; */
+  /* } __PACK; */
   
-  struct am_bootloader_control_packet {
-    unsigned char opcode;       /* 0 */
-    unsigned char length;       /* 1 */
-    unsigned char magic[2];     /* 2: 0x34, 0x12 */
-    unsigned char payload[0];   /* 4 */
-  } __PACK;
+  /* struct am_bootloader_control_packet { */
+  /*   unsigned char opcode;       /\* 0 *\/ */
+  /*   unsigned char length;       /\* 1 *\/ */
+  /*   unsigned char magic[2];     /\* 2: 0x34, 0x12 *\/ */
+  /*   unsigned char payload[0];   /\* 4 *\/ */
+  /* } __PACK; */
   
   /* ----------------------------------------------------------------------------
    *   Public routines
@@ -211,7 +211,7 @@ extern "C" {
 
   /*  Returns serial field of am_device structure
    */
-  CFStringRef AMDeviceCopyDeviceIdentifier(struct am_device *device);
+  //CFStringRef AMDeviceCopyDeviceIdentifier(struct am_device *device);
 
   /*  Connects to the iPhone. Pass in the am_device structure that the
    *  notification callback will give to you.
@@ -297,7 +297,7 @@ extern "C" {
          * Possible values for domain:
          * com.apple.mobile.battery
    */
-  CFStringRef AMDeviceCopyValue(struct am_device *device, CFStringRef domain, CFStringRef cfstring);
+  //CFStringRef AMDeviceCopyValue(struct am_device *device, CFStringRef domain, CFStringRef cfstring);
   
   /* Starts a service and returns a socket file descriptor that can be used in order to further
    * access the service. You should stop the session and disconnect before using
@@ -310,8 +310,8 @@ extern "C" {
    *      MDERR_SYSCALL           if the setsockopt() call failed
    *      MDERR_INVALID_ARGUMENT  if the Lockdown conn has not been established
    */
-  mach_error_t AMDeviceStartService(struct am_device *device, CFStringRef 
-                    service_name, int *socket_fd);
+  /* mach_error_t AMDeviceStartService(struct am_device *device, CFStringRef */
+  /*                   service_name, int *socket_fd); */
   
   /* Stops a session. You should do this before accessing services.
    *
@@ -324,11 +324,11 @@ extern "C" {
   /* Decrements reference counter and, if nothing left, releases resources hold 
    * by connection, invalidates  pointer to device
    */
-  void AMDeviceRelease(struct am_device *device);
+  //void AMDeviceRelease(struct am_device *device);
 
   /* Increments reference counter
    */
-  void AMDeviceRetain(struct am_device *device);
+  //void AMDeviceRetain(struct am_device *device);
 
   /* Opens an Apple File Connection. You must start the appropriate service
    * first with AMDeviceStartService(). In iTunes, io_timeout is 0.
@@ -337,8 +337,8 @@ extern "C" {
    *      MDERR_OK                if successful
    *      MDERR_AFC_OUT_OF_MEMORY if malloc() failed
    */
-  afc_error_t AFCConnectionOpen(int socket_fd, unsigned int io_timeout,
-                  struct afc_connection **conn);
+  /* afc_error_t AFCConnectionOpen(int socket_fd, unsigned int io_timeout, */
+  /*                 struct afc_connection **conn); */
 
 
         /* Copy an enviromental variable value from iBoot
@@ -395,8 +395,8 @@ extern "C" {
          * target - absolute or relative path to link target
          * linkname - absolute path where to create new link
    */
-  afc_error_t AFCLinkPath(struct afc_connection *conn, long long int linktype, const char *target, 
-                                              const char *linkname);
+  /* afc_error_t AFCLinkPath(struct afc_connection *conn, long long int linktype, const char *target,  */
+  /*                                             const char *linkname); */
 
   /* Opens file for reading or writing without locking it in any way. afc_file_ref should not be shared between threads - 
          * opening file in one thread and closing it in another will lead to possible crash.
@@ -408,8 +408,8 @@ extern "C" {
                  unsigned long long int mode, afc_file_ref *ref);
   /* Reads specified amount (len) of bytes from file into buf. Puts actual count of read bytes into len on return
    */
-  afc_error_t AFCFileRefRead(struct afc_connection *conn, afc_file_ref ref,
-                 void *buf, unsigned int *len);
+  /* afc_error_t AFCFileRefRead(struct afc_connection *conn, afc_file_ref ref, */
+  /*                void *buf, unsigned int *len); */
   /* Writes specified amount (len) of bytes from buf into file.
    */
   afc_error_t AFCFileRefWrite(struct afc_connection *conn, afc_file_ref ref,
@@ -432,8 +432,8 @@ extern "C" {
                  unsigned long long offset);
 
 
-  afc_error_t AFCFileRefLock(struct afc_connection *conn, afc_file_ref ref);
-  afc_error_t AFCFileRefUnlock(struct afc_connection *conn, afc_file_ref ref);
+  //afc_error_t AFCFileRefLock(struct afc_connection *conn, afc_file_ref ref);
+  //afc_error_t AFCFileRefUnlock(struct afc_connection *conn, afc_file_ref ref);
   afc_error_t AFCFileRefClose(struct afc_connection *conn, afc_file_ref ref);
 
   /* Opens dictionary describing specified file or directory (iTunes below 8.2 allowed using AFCGetFileInfo
@@ -496,7 +496,7 @@ extern "C" {
    * "$HOME/Library/Logs/iPhone Updater Logs/iPhoneUpdater X.log", where X is an
    * unused number.
    */
-  unsigned int AMRestoreEnableFileLogging(const char *path);
+  //unsigned int AMRestoreEnableFileLogging(const char *path);
   
   /* Initializes a new option dictionary to default values. Pass the constant
    * kCFAllocatorDefault as the allocator. The option dictionary looks as
@@ -551,7 +551,7 @@ extern "C" {
   
   /*edits by geohot*/
   mach_error_t AMDeviceDeactivate(struct am_device *device);
-  mach_error_t AMDeviceActivate(struct am_device *device, CFDictionaryRef dict);
+  // mach_error_t AMDeviceActivate(struct am_device *device, CFDictionaryRef dict);
   mach_error_t AMDeviceRemoveValue(struct am_device *device, unsigned int, CFStringRef cfstring);
   
   /* ----------------------------------------------------------------------------

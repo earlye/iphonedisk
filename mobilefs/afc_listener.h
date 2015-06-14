@@ -8,7 +8,7 @@
 #define __MOBILEFS_AFC_LISTENER_H__
 
 #include <string>
-#include "mobilefs/mobiledevice.h"
+#include "MobileDevice.h"
 
 namespace mobilefs {
 

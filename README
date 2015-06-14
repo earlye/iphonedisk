@@ -1,23 +1,25 @@
 iphonedisk3
 -----------
 
-iphonedisk is a OSXFuse based filesystem that lets you access the contents of
-your iphone or ipod via USB.
+iphonedisk is a OSXFuse based filesystem that lets you access the
+contents of your iphone or ipod via USB.
 
-This package contains an update of the rewrite of iphonedisk.  The original was
-plagued with bugs that were difficult to track down due to the nature of its
-design, and this rewrite is an attempt to fix that.
+This package contains an update of the rewrite of iphonedisk.  The
+original was plagued with bugs that were difficult to track down due
+to the nature of its design, and this rewrite is an attempt to fix
+that.
 
-The current shipping iphonedisk again runs as a single process, mobile_fs_util,
-however contains now GUI.  mobile_fs_util runs as a launch agent that waits
-for an iphone USB connection.  The installer package places the launch agent
-in /Library/iphonedisk and a .plist file in /Library/Launch Agents/.  The .plist
-file has configuration parameters such as the volume icon and volume name used
-when the disk is mounted.  You must reload the agent (or your computer) any
-time the configuration parameter are changed.
+The current shipping iphonedisk again runs as a single process,
+mobile_fs_util, however contains now GUI.  mobile_fs_util runs as a
+launch agent that waits for an iphone USB connection.  The installer
+package places the launch agent in /Library/iphonedisk and a .plist
+file in /Library/Launch Agents/.  The .plist file has configuration
+parameters such as the volume icon and volume name used when the disk
+is mounted.  You must reload the agent (or your computer) any time the
+configuration parameter are changed.
 
-This project uses protocol buffer services as an API between components, but
-doesn't actually send any RPCs.  Originally it was going to (to provide some
-isolation between components), but in the end it seemed simpler to just put
-everything in a single process.
+This project uses protocol buffer services as an API between
+components, but doesn't actually send any RPCs.  Originally it was
+going to (to provide some isolation between components), but in the
+end it seemed simpler to just put everything in a single process.
 

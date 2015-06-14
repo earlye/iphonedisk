@@ -4,16 +4,15 @@
 
 
 #include "proto/fs_service.pb.h"
-#include "mobilefs/mobiledevice.h"
+#include "mobilefs/mobiledevice_ex.h"
+
+#include "MobileDevice.h"
 
 #include <string>
 #include <set>
 #include <sys/fcntl.h>
 #include <sys/stat.h>
 #include <syslog.h>
-
-
-
 
 namespace mobilefs {
 
@@ -30,6 +29,7 @@ class MobileFsService : public proto::FsService {
                const proto::GetAttrRequest* request,
                proto::GetAttrResponse* response,
                Closure* done) {
+    syslog(LOG_ERR, "%s (%d) %s", __FILE__ , __LINE__ , __FUNCTION__  );
     struct afc_dictionary *info;
     if (AFCFileInfoOpen(conn_, (char*)request->path().c_str(),
                         &info) != MDERR_OK) {
@@ -83,12 +83,14 @@ class MobileFsService : public proto::FsService {
       }
     }
     done->Run();
+    syslog(LOG_ERR, "%s (%d) %s - done", __FILE__ , __LINE__ , __FUNCTION__  );
   }
 
   void ReadLink(RpcController* rpc,
                 const proto::ReadLinkRequest* request,
                 proto::ReadLinkResponse* response,
                 Closure* done) {
+    syslog(LOG_ERR, "%s (%d) %s", __FILE__ , __LINE__ , __FUNCTION__  );
     struct afc_dictionary *info;
     if (AFCFileInfoOpen(conn_, (char*)request->path().c_str(),
                         &info) != MDERR_OK) {
@@ -104,25 +106,29 @@ class MobileFsService : public proto::FsService {
       }
     }
     done->Run();
+    syslog(LOG_ERR, "%s (%d) %s - done", __FILE__ , __LINE__ , __FUNCTION__  );
   }
 
   void SymLink(RpcController* rpc,
                const proto::SymLinkRequest* request,
                proto::SymLinkResponse* response,
                Closure* done) {
+    syslog(LOG_ERR, "%s (%d) %s", __FILE__ , __LINE__ , __FUNCTION__  );
     int ret = AFCLinkPath(conn_, /* soft */ 2,
                           request->source().c_str(),
-request->target().c_str());
+                          request->target().c_str());
     if (ret != MDERR_OK) {
       rpc->SetFailed("AFCLinkPath failed");
     }
     done->Run();
+    syslog(LOG_ERR, "%s (%d) %s - done", __FILE__ , __LINE__ , __FUNCTION__  );
   }
 
   void ReadDir(RpcController* rpc,
                const proto::ReadDirRequest* request,
                proto::ReadDirResponse* response,
                Closure* done) {
+    syslog(LOG_ERR, "%s (%d) %s", __FILE__ , __LINE__ , __FUNCTION__  );
     struct afc_directory* dir;
     int ret = AFCDirectoryOpen(conn_, request->path().c_str(), &dir);
     if (ret != MDERR_OK) {
@@ -143,46 +149,54 @@ request->target().c_str());
       AFCDirectoryClose(conn_, dir);
     }
     done->Run();
+    syslog(LOG_ERR, "%s (%d) %s - done", __FILE__ , __LINE__ , __FUNCTION__  );
   }
 
   void Unlink(RpcController* rpc,
               const proto::UnlinkRequest* request,
               proto::UnlinkResponse* response,
               Closure* done) {
+    syslog(LOG_ERR, "%s (%d) %s", __FILE__ , __LINE__ , __FUNCTION__  );
     int res = AFCRemovePath(conn_, request->path().c_str());
     if (res != MDERR_OK) {
       rpc->SetFailed("AFCRemovePath failed");
     }
     done->Run();
+    syslog(LOG_ERR, "%s (%d) %s - done", __FILE__ , __LINE__ , __FUNCTION__  );
   }
 
   void MkDir(RpcController* rpc,
              const proto::MkDirRequest* request,
              proto::MkDirResponse* response,
              Closure* done) {
+    syslog(LOG_ERR, "%s (%d) %s", __FILE__ , __LINE__ , __FUNCTION__  );
     int res = AFCDirectoryCreate(conn_, request->path().c_str());
     if (res != MDERR_OK) {
       rpc->SetFailed("AFCDirectoryCreate failed");
     }
     done->Run();
+    syslog(LOG_ERR, "%s (%d) %s - done", __FILE__ , __LINE__ , __FUNCTION__  );
   }
 
   void Rename(RpcController* rpc,
               const proto::RenameRequest* request,
               proto::RenameResponse* response,
               Closure* done) {
+    syslog(LOG_ERR, "%s (%d) %s", __FILE__ , __LINE__ , __FUNCTION__  );
     int res = AFCRenamePath(conn_, request->source_path().c_str(),
                             request->destination_path().c_str());
     if (res != MDERR_OK) {
       rpc->SetFailed("AFCRenamePath failed");
     }
     done->Run();
+    syslog(LOG_ERR, "%s (%d) %s - done", __FILE__ , __LINE__ , __FUNCTION__  );
   }
 
   void Open(RpcController* rpc,
             const proto::OpenRequest* request,
             proto::OpenResponse* response,
             Closure* done) {
+    syslog(LOG_ERR, "%s (%d) %s", __FILE__ , __LINE__ , __FUNCTION__  );
     // O_RDONLY/O_WRONLY/O_RDWR (0/1/2) => (1/2/3)
     int mode = (request->flags() & O_ACCMODE) + 1;
     afc_file_ref fd;
@@ -193,12 +207,14 @@ request->target().c_str());
       response->set_filehandle(fd);
     }
     done->Run();
+    syslog(LOG_ERR, "%s (%d) %s - done", __FILE__ , __LINE__ , __FUNCTION__  );
   }
 
   void Create(RpcController* rpc,
               const proto::CreateRequest* request,
               proto::CreateResponse* response,
               Closure* done) {
+    syslog(LOG_ERR, "%s (%d) %s", __FILE__ , __LINE__ , __FUNCTION__  );
     afc_file_ref fd;
     int ret = AFCFileRefOpen(conn_, request->path().c_str(), 3, &fd);
     if (ret != MDERR_OK) {
@@ -207,20 +223,24 @@ request->target().c_str());
       response->set_filehandle(fd);
     }
     done->Run();
+    syslog(LOG_ERR, "%s (%d) %s - done", __FILE__ , __LINE__ , __FUNCTION__  );
   }
 
   void Release(RpcController* rpc,
                const proto::ReleaseRequest* request,
                proto::ReleaseResponse* response,
                Closure* done) {
+    syslog(LOG_ERR, "%s (%d) %s", __FILE__ , __LINE__ , __FUNCTION__  );
     AFCFileRefClose(conn_, request->filehandle());
     done->Run();
+    syslog(LOG_ERR, "%s (%d) %s - done", __FILE__ , __LINE__ , __FUNCTION__  );
   }
 
   void Read(RpcController* rpc,
             const proto::ReadRequest* request,
             proto::ReadResponse* response,
             Closure* done) {
+    syslog(LOG_ERR, "%s (%d) %s", __FILE__ , __LINE__ , __FUNCTION__  );
     if (request->size() > kMaxBufferSize) {
       rpc->SetFailed("Read request too large");
       done->Run();
@@ -232,8 +252,12 @@ request->target().c_str());
       rpc->SetFailed("AFCFileRefSeek failed");
     } else {
       void* buf = malloc(request->size());
-      unsigned int n = request->size();
-      ret = AFCFileRefRead(conn_, request->filehandle(), buf, &n);
+      long long n = request->size(); 
+
+      // afc_error_t AFCFileRefRead(struct afc_connection *conn, afc_file_ref ref, void *buf, signed long long *len);
+      // request->filehandle() is actually an int64...
+      afc_file_ref file_ref = (afc_file_ref)request->filehandle();
+      ret = AFCFileRefRead(conn_, file_ref, buf, &n);
       if (ret != MDERR_OK) {
         rpc->SetFailed("AFCFileRefRead failed");
       } else {
@@ -242,12 +266,14 @@ request->target().c_str());
       free(buf);
     }
     done->Run();
+    syslog(LOG_ERR, "%s (%d) %s - done", __FILE__ , __LINE__ , __FUNCTION__  );
   }
 
   void Write(RpcController* rpc,
              const proto::WriteRequest* request,
              proto::WriteResponse* response,
              Closure* done) {
+    syslog(LOG_ERR, "%s (%d) %s", __FILE__ , __LINE__ , __FUNCTION__  );
     int ret = AFCFileRefSeek(conn_, request->filehandle(), request->offset(),
                              0);
     if (ret != MDERR_OK) {
@@ -263,12 +289,14 @@ request->target().c_str());
       }
     }
     done->Run();
+    syslog(LOG_ERR, "%s (%d) %s - done", __FILE__ , __LINE__ , __FUNCTION__  );
   }
 
   void Truncate(RpcController* rpc,
                 const proto::TruncateRequest* request,
                 proto::TruncateResponse* response,
                 Closure* done) {
+    syslog(LOG_ERR, "%s (%d) %s", __FILE__ , __LINE__ , __FUNCTION__  );
     afc_file_ref fd;
     int ret = AFCFileRefOpen(conn_, request->path().c_str(), 3, &fd);
     if (ret != MDERR_OK) {
@@ -281,12 +309,14 @@ request->target().c_str());
       }
     }
     done->Run();
+    syslog(LOG_ERR, "%s (%d) %s - done", __FILE__ , __LINE__ , __FUNCTION__  );
   }
 
   void StatFs(RpcController* rpc,
               const proto::StatFsRequest* request,
               proto::StatFsResponse* response,
               Closure* done) {
+    syslog(LOG_ERR, "%s (%d) %s", __FILE__ , __LINE__ , __FUNCTION__  );
     struct afc_dictionary* info;
     if (AFCDeviceInfoOpen(conn_, &info) != MDERR_OK) {
       rpc->SetFailed("AFCDeviceInfoOpen failed");
@@ -311,6 +341,7 @@ request->target().c_str());
       }
     }
     done->Run();
+    syslog(LOG_ERR, "%s (%d) %s - done", __FILE__ , __LINE__ , __FUNCTION__  );
   }
 
  private:
@@ -319,7 +350,7 @@ request->target().c_str());
                         std::map<std::string, std::string>* out) {
     char *key, *val;
     while ((AFCKeyValueRead(in, &key, &val) == MDERR_OK) && key && val) {
-printf("%s => %s\n", key, val);
+      // printf("%s => %s\n", key, val);
       (*out)[key] = val;
     }
   }

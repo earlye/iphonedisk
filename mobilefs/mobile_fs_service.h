@@ -3,7 +3,8 @@
 #ifndef __MOBILE_FS_SERVICE_H__
 #define __MOBILE_FS_SERVICE_H__
 
-#include "mobilefs/mobiledevice.h"
+#include "MobileDevice.h"
+#include "mobilefs/mobiledevice_ex.h"
 
 namespace proto {
 class FsService;

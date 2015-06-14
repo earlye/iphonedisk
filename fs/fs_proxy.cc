@@ -41,6 +41,7 @@ class MountPoint {
     rmdir(mount_path_.c_str());
     mkdir(mount_path_.c_str(), S_IFDIR|0755);
 
+    syslog(LOG_ERR, "mount_path:%s", mount_path_.c_str());
     channel_ = fuse_mount(mount_path_.c_str(), &args_);
     if (channel_ == NULL) {
       syslog(LOG_ERR, "fuse_mount() failed");
