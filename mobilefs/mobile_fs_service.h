@@ -15,4 +15,8 @@ proto::FsService* NewMobileFsService(afc_connection* conn);
 
 }  // namespace mobilefs
 
+#ifdef TYPE_BOOL
+#undef TYPE_BOOL
+#endif
+
 #endif  // __MOBILE_FS_SERVICE_H__

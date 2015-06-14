@@ -5,7 +5,7 @@
 
 #include "fs/fs_fuse.h"
 
-#include <fuse.h>
+#include <fuse/fuse.h>
 #include <errno.h>
 #include <strings.h>
 #include <sys/stat.h>

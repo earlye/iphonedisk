@@ -1,0 +1,10 @@
+fuse
+\#*
+.scons*
+*.o
+*.a
+.*
+proto/*.cc
+proto/*.h
+test/loopback_fs_util
+mobilefs/mobile_fs_util

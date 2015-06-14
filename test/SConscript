@@ -11,4 +11,4 @@ env.Append(CPPFLAGS = '-D_FILE_OFFSET_BITS=64 -D__FreeBSD__=10 -DFUSE_USE_VERSIO
 env.Program('loopback_fs_util',
             [ 'loopback_fs_util.cc' ],
             LIBS = [ fs, rpc, loopback_fs_service, proto,
-                     'protobuf', 'fuse_ino64' ])
+                     'protobuf', 'osxfuse' ])

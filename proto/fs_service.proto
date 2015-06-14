@@ -4,6 +4,7 @@
 
 import "proto/fs.proto";
 
+option cc_generic_services = true;
 package proto;
 
 service FsService {
@@ -21,4 +22,4 @@ service FsService {
   rpc Rename (RenameRequest) returns (RenameResponse);
   rpc MkDir (MkDirRequest) returns (MkDirResponse);
   rpc StatFs (StatFsRequest) returns (StatFsResponse);
-}
+};

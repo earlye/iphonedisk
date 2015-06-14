@@ -1,5 +1,6 @@
 // Author: Allen Porter <allen@thebends.org>
 
+option cc_generic_services = true;
 package proto;
 
 message MountRequest {

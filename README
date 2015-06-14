@@ -1,10 +1,10 @@
-iphonedisk2
+iphonedisk3
 -----------
 
-iphonedisk is a MacFUSE based filesystem that lets you access the contents of
+iphonedisk is a OSXFuse based filesystem that lets you access the contents of
 your iphone or ipod via USB.
 
-This package contains a re-write of the original iphonedisk.  The original was
+This package contains an update of the rewrite of iphonedisk.  The original was
 plagued with bugs that were difficult to track down due to the nature of its
 design, and this rewrite is an attempt to fix that.
 
@@ -20,3 +20,4 @@ This project uses protocol buffer services as an API between components, but
 doesn't actually send any RPCs.  Originally it was going to (to provide some
 isolation between components), but in the end it seemed simpler to just put
 everything in a single process.
+
